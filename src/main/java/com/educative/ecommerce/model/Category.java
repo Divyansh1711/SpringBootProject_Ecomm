@@ -12,73 +12,70 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
-@Entity(name = "categories")
+@Entity
+@Table(name = "categories")
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    @Column(name="category_name")
+    @Column(name = "category_name")
     private @NotBlank String categoryName;
 
-    private @NotBlank String categoryDescription;
+    private @NotBlank String description;
 
-    private @NotBlank String imgUrl;
+    private @NotBlank String imageUrl;
 
-    public Category(){}
 
-    public Category(@ NotBlank String categoryName,@NotBlank String categoryDescription) {
-        this.categoryName = categoryName;
-        this.categoryDescription = categoryDescription;
+    public Category() {
     }
 
-    public Category(@NotBlank String categoryName,@NotBlank String categoryDescription, @NotBlank String imgUrl) {
+    public Category(@NotBlank String categoryName, @NotBlank String description) {
         this.categoryName = categoryName;
-        this.categoryDescription = categoryDescription;
-        this.imgUrl = imgUrl;
+        this.description = description;
     }
 
-    public Integer getId() {
-        return id;
+    public Category(@NotBlank String categoryName, @NotBlank String description, @NotBlank String imageUrl) {
+        this.categoryName = categoryName;
+        this.description = description;
+        this.imageUrl = imageUrl;
     }
 
     public String getCategoryName() {
-        return categoryName;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    @NotBlank
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        return this.categoryName;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setImgUrl(@NotBlank String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                ", categoryDescription='" + categoryDescription + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
-                '}';
+        return "User {category id=" + id + ", category name='" + categoryName + "', description='" + description + "'}";
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
