@@ -1,6 +1,7 @@
 package com.springboot_project1.ecommerce.service;
 
 import com.springboot_project1.ecommerce.dto.ProductDto;
+import com.springboot_project1.ecommerce.exceptions.ProductNotExistException;
 import com.springboot_project1.ecommerce.model.Category;
 import com.springboot_project1.ecommerce.model.Product;
 import com.springboot_project1.ecommerce.repository.ProductRepository;
@@ -53,6 +54,15 @@ public class ProductService {
                productDtos.add(new ProductDto(product));
           }
           return productDtos;
+     }
+
+     public Product getProductById(Integer productId) throws ProductNotExistException {
+          Optional<Product> product= productRepository.findById(productId);
+          if(product.isEmpty()){
+               throw new ProductNotExistException("Product id not exist"+ productId);
+          }
+
+          return product.get();
      }
 
 }
